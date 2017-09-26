@@ -1,5 +1,14 @@
-var vue-elucidate =
-/******/ (function(modules) { // webpackBootstrap
+(function webpackUniversalModuleDefinition(root, factory) {
+	if(typeof exports === 'object' && typeof module === 'object')
+		module.exports = factory(require("vue"));
+	else if(typeof define === 'function' && define.amd)
+		define(["vue"], factory);
+	else if(typeof exports === 'object')
+		exports["vue-elucidate"] = factory(require("vue"));
+	else
+		root["vue-elucidate"] = factory(root["vue"]);
+})(this, function(__WEBPACK_EXTERNAL_MODULE_1__) {
+return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
 /******/
@@ -76,19 +85,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
-var Plugin = {
+var plugin = {
   install: function install(Vue, options) {
     Vue.component('Elucidate', __WEBPACK_IMPORTED_MODULE_1__Elucidate_vue__["a" /* default */]);
   }
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Plugin);
+/* harmony default export */ __webpack_exports__["default"] = (plugin);
 
 /***/ }),
 /* 1 */
 /***/ (function(module, exports) {
 
-module.exports = vue;
+module.exports = __WEBPACK_EXTERNAL_MODULE_1__;
 
 /***/ }),
 /* 2 */
@@ -225,9 +234,17 @@ module.exports = function normalizeComponent (
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["a"] = ({
-  name: 'elucidate'
+  name: 'elucidate',
+  props: {
+    markup: {
+      type: String,
+      required: true
+    }
+  }
 });
 
 /***/ }),
@@ -235,10 +252,11 @@ module.exports = function normalizeComponent (
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('p',[_vm._v("Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae sed illum facere. Earum exercitationem temporibus fugiat odit blanditiis dolorem! Natus dicta doloremque, quam eligendi adipisci beatae velit fugiat. Eum, possimus.")])}
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_vm._v("\n  "+_vm._s(_vm.markup)+"\n")])}
 var staticRenderFns = []
 var esExports = { render: render, staticRenderFns: staticRenderFns }
 /* harmony default export */ __webpack_exports__["a"] = (esExports);
 
 /***/ })
 /******/ ]);
+});

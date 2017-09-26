@@ -1,10 +1,10 @@
 import Vue from 'vue'
 import Elucidate from './Elucidate.vue'
 
-const Plugin = {
+const plugin = {
   install(Vue, options) {
     Vue.component('Elucidate', Elucidate)
   }
 }
 
-export default Plugin
+export default plugin

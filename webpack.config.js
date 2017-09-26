@@ -8,7 +8,8 @@ module.exports = {
     path: path.resolve(__dirname, './dist'),
     publicPath: '/dist/',
     filename: 'index.js',
-    library: 'vue-elucidate'
+    library:'vue-elucidate',
+    libraryTarget: 'umd'
   },
   module: {
     rules: [
