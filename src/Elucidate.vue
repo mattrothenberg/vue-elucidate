@@ -1,7 +1,7 @@
 <template>
   <div>
-    <rendered-markup :markup="markup" :component="component"></rendered-markup>
-    <code-snippet :code="markup"></code-snippet>
+    <rendered-example :example="example" :component="component"></rendered-example>
+    <code-snippet :code="example.markup"></code-snippet>
     <props-table :component="component"></props-table>
   </div>
 </template>
@@ -9,19 +9,19 @@
 <script>
   import Vue from 'vue'
   import CodeSnippet from './CodeSnippet.vue'
-  import RenderedMarkup from './RenderedMarkup.vue'
+  import RenderedExample from './RenderedExample.vue'
   import PropsTable from './PropsTable.vue'
 
   export default {
     name: 'elucidate',
     components: {
       CodeSnippet,
-      RenderedMarkup,
+      RenderedExample,
       PropsTable
     },
     props: {
-      markup: {
-        type: String,
+      example: {
+        type: Object,
         required: true
       },
       component: {

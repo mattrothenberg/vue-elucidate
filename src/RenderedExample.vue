@@ -8,10 +8,10 @@
   import Vue from 'vue'
 
   export default {
-    name: 'rendered-markup',
+    name: 'rendered-example',
     props: {
-      markup: {
-        type: String,
+      example: {
+        type: Object,
         required: true
       },
       component: {
@@ -23,7 +23,8 @@
     },
     mounted () {
       let MarkedUp = Vue.extend({
-        template: this.markup
+        template: this.example.markup,
+        props: this.example.props
       })
       new MarkedUp({ el: this.$refs.rendered })
     }

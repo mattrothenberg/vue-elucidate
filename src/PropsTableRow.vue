@@ -3,7 +3,9 @@
     <td>
       <pre>{{ name }}</pre>
     </td>
-    <td>{{ type }}</td>
+    <td>
+      <pre>{{ type }}</pre>
+    </td>
     <td>{{ prop.default }}</td>
   </tr>
 </template>
