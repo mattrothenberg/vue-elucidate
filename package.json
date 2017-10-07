@@ -23,5 +23,8 @@
     "vue-loader": "^13.0.5",
     "vue-template-compiler": "^2.4.4",
     "webpack": "^3.6.0"
+  },
+  "dependencies": {
+    "prismjs": "^1.8.1"
   }
 }
