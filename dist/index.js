@@ -4499,17 +4499,50 @@ module.exports = function listToStyles(parentId, list) {
       required: true
     }
   },
+  methods: {
+    objectEmpty: function objectEmpty(obj) {
+      return Object.keys(obj).length === 0 && obj.constructor === Object;
+    },
+    beautifyMethod: function beautifyMethod(method) {
+      return __WEBPACK_IMPORTED_MODULE_1_js_beautify___default()(method.toString().replace('function', ''));
+    }
+  },
   computed: {
     shouldShowScriptTab: function shouldShowScriptTab() {
-      if (!this.example.props) return false;
-
-      return Object.keys(this.example.props).length !== 0 && this.example.props.constructor === Object;
+      return this.hasProps || this.hasMethods;
     },
-    propsToString: function propsToString() {
-      return JSON.stringify(this.example.props);
+    hasProps: function hasProps() {
+      if (!this.example.props) return false;
+      return !this.objectEmpty(this.example.props);
+    },
+    hasMethods: function hasMethods() {
+      if (!this.example.methods) return false;
+      return !this.objectEmpty(this.example.methods);
+    },
+    renderProps: function renderProps() {
+      if (this.hasProps) {
+        return 'data () { ' + JSON.stringify(this.example.props) + '}';
+      } else {
+        return '';
+      }
+    },
+    renderMethods: function renderMethods() {
+      var _this = this;
+
+      if (this.hasMethods) {
+        var methodNames = Object.keys(this.example.methods);
+        var formattedMethods = methodNames.map(function (name) {
+          return _this.beautifyMethod(_this.example.methods[name]);
+        }).join(',');
+        return 'methods: {' + formattedMethods + '}';
+      } else {
+        return '';
+      }
     },
     script: function script() {
-      var template = 'export default {\n  data () {\n    return {\n      ' + this.propsToString + '\n    }\n  }\n}\n';
+      var optionalComma = this.hasProps && this.hasMethods ? ',' : '';
+
+      var template = 'export default {' + this.renderProps + optionalComma + this.renderMethods;
       return __WEBPACK_IMPORTED_MODULE_1_js_beautify___default()(template, { indent_size: 2, end_with_newline: true });
     }
   }
@@ -6315,7 +6348,7 @@ var esExports = { render: render, staticRenderFns: staticRenderFns }
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_RenderedExample_vue__ = __webpack_require__(21);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_6837cdb8_hasScoped_true_node_modules_vue_loader_lib_selector_type_template_index_0_RenderedExample_vue__ = __webpack_require__(22);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_6837cdb8_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_RenderedExample_vue__ = __webpack_require__(22);
 function injectStyle (ssrContext) {
   __webpack_require__(19)
 }
@@ -6327,12 +6360,12 @@ var normalizeComponent = __webpack_require__(0)
 /* styles */
 var __vue_styles__ = injectStyle
 /* scopeId */
-var __vue_scopeId__ = "data-v-6837cdb8"
+var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
   __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_RenderedExample_vue__["a" /* default */],
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_6837cdb8_hasScoped_true_node_modules_vue_loader_lib_selector_type_template_index_0_RenderedExample_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_6837cdb8_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_RenderedExample_vue__["a" /* default */],
   __vue_styles__,
   __vue_scopeId__,
   __vue_module_identifier__
@@ -6352,7 +6385,7 @@ var content = __webpack_require__(20);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(2)("079b68c4", content, true);
+var update = __webpack_require__(2)("8203d936", content, true);
 
 /***/ }),
 /* 20 */
@@ -6363,7 +6396,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, ".preview[data-v-6837cdb8]{background:#f4f5fa;border-radius:.5rem;padding:1rem}", ""]);
+exports.push([module.i, ".preview{background:#f4f5fa;border-radius:.5rem;padding:1rem}", ""]);
 
 // exports
 
@@ -6401,7 +6434,8 @@ exports.push([module.i, ".preview[data-v-6837cdb8]{background:#f4f5fa;border-rad
   mounted: function mounted() {
     var MarkedUp = __WEBPACK_IMPORTED_MODULE_0_vue___default.a.extend({
       template: this.example.markup,
-      props: this.example.props
+      props: this.example.props,
+      methods: this.example.methods
     });
     new MarkedUp({ el: this.$refs.rendered });
   }

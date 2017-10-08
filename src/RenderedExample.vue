@@ -24,14 +24,15 @@
     mounted () {
       let MarkedUp = Vue.extend({
         template: this.example.markup,
-        props: this.example.props
+        props: this.example.props,
+        methods: this.example.methods
       })
       new MarkedUp({ el: this.$refs.rendered })
     }
   }
 </script>
 
-<style scoped>
+<style>
   .preview {
     background: #f4f5fa;
     border-radius: .5rem;

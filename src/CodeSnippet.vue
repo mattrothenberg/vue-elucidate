@@ -25,25 +25,51 @@
         required: true
       }
     },
+    methods: {
+      objectEmpty (obj) {
+        return Object.keys(obj).length === 0 && obj.constructor === Object
+      },
+      beautifyMethod (method) {
+        return beautify(method.toString().replace('function', ''))
+      }
+    },
     computed: {
       shouldShowScriptTab () {
-        if (!this.example.props) return false
-        
-        return Object.keys(this.example.props).length !== 0 && this.example.props.constructor === Object
+        return this.hasProps || this.hasMethods
       },
-      propsToString () {
-        return JSON.stringify(this.example.props)
+      hasProps () {
+        if (!this.example.props) return false
+        return !this.objectEmpty(this.example.props)
+      },
+      hasMethods () {
+        if (!this.example.methods) return false
+        return !this.objectEmpty(this.example.methods)
+      },
+      renderProps () {
+        if (this.hasProps) {
+          return `data () { ${JSON.stringify(this.example.props)}}`
+        } else {
+          return ''
+        }
+      },
+      renderMethods () {
+        if (this.hasMethods) {
+          let methodNames = Object.keys(this.example.methods)
+          let formattedMethods = methodNames.map((name) => {
+            return this.beautifyMethod(this.example.methods[name])
+          }).join(',')
+          return `methods: {${formattedMethods}}`
+        } else {
+          return ''
+        }
       },
       script () {
-        const template = `export default {
-  data () {
-    return {
-      ${this.propsToString}
-    }
-  }
-}
-`
-      return beautify(template, {indent_size: 2, end_with_newline: true})
+        const optionalComma = this.hasProps && this.hasMethods
+          ? ','
+          : ''
+
+        const template = `export default {${this.renderProps}${optionalComma}${this.renderMethods}`
+        return beautify(template, {indent_size: 2, end_with_newline: true})
       }
     }
   }
