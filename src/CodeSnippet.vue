@@ -3,7 +3,7 @@
     <v-tab title="Markup">
       <pre style="margin: 0;" class="language-markup"><code>{{ example.markup }}</code></pre>
     </v-tab>
-    <v-tab title="Script">
+    <v-tab title="Script" v-if="shouldShowScriptTab">
       <pre style="margin: 0;" class="language-javascript"><code>{{ script }}</code></pre>
     </v-tab>
   </vue-tabs>
@@ -26,6 +26,11 @@
       }
     },
     computed: {
+      shouldShowScriptTab () {
+        if (!this.example.props) return false
+        
+        return Object.keys(this.example.props).length !== 0 && this.example.props.constructor === Object
+      },
       propsToString () {
         return JSON.stringify(this.example.props)
       },

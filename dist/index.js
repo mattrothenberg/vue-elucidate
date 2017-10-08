@@ -4500,6 +4500,11 @@ module.exports = function listToStyles(parentId, list) {
     }
   },
   computed: {
+    shouldShowScriptTab: function shouldShowScriptTab() {
+      if (!this.example.props) return false;
+
+      return Object.keys(this.example.props).length !== 0 && this.example.props.constructor === Object;
+    },
     propsToString: function propsToString() {
       return JSON.stringify(this.example.props);
     },
@@ -6299,7 +6304,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var _typeof = ty
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('vue-tabs',[_c('v-tab',{attrs:{"title":"Markup"}},[_c('pre',{staticClass:"language-markup",staticStyle:{"margin":"0"}},[_c('code',[_vm._v(_vm._s(_vm.example.markup))])])]),_vm._v(" "),_c('v-tab',{attrs:{"title":"Script"}},[_c('pre',{staticClass:"language-javascript",staticStyle:{"margin":"0"}},[_c('code',[_vm._v(_vm._s(_vm.script))])])])],1)}
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('vue-tabs',[_c('v-tab',{attrs:{"title":"Markup"}},[_c('pre',{staticClass:"language-markup",staticStyle:{"margin":"0"}},[_c('code',[_vm._v(_vm._s(_vm.example.markup))])])]),_vm._v(" "),(_vm.shouldShowScriptTab)?_c('v-tab',{attrs:{"title":"Script"}},[_c('pre',{staticClass:"language-javascript",staticStyle:{"margin":"0"}},[_c('code',[_vm._v(_vm._s(_vm.script))])])]):_vm._e()],1)}
 var staticRenderFns = []
 var esExports = { render: render, staticRenderFns: staticRenderFns }
 /* harmony default export */ __webpack_exports__["a"] = (esExports);
