@@ -1,7 +1,7 @@
 <template>
   <div>
     <rendered-example :example="example" :component="component"></rendered-example>
-    <code-snippet :code="example.markup"></code-snippet>
+    <code-snippet :example="example"></code-snippet>
     <props-table :component="component"></props-table>
   </div>
 </template>
