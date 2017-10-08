@@ -105,4 +105,8 @@
     text-decoration: none;
     color: inherit;
   }
+
+  .vue-tabs {
+    margin-bottom: 1rem;
+  }
 </style>

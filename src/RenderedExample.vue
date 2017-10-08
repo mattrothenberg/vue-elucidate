@@ -37,5 +37,6 @@
     background: #f4f5fa;
     border-radius: .5rem;
     padding: 1rem;
+    margin-bottom: 1rem;
   }
 </style>

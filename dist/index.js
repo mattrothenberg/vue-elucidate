@@ -4426,7 +4426,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, ".nav-tabs-wrapper .nav-tabs{margin:0;padding:0}.nav-tabs-wrapper .tab{display:inline-block;color:#a9a9a9}.nav-tabs-wrapper .tab:hover{color:grey}.nav-tabs-wrapper .tab.active{color:#222;font-weight:600}.nav-tabs-wrapper .tab:not(:last-of-type){margin-right:1em}.nav-tabs-wrapper .tab a{display:block;padding:.5em 0;text-decoration:none;color:inherit}", ""]);
+exports.push([module.i, ".nav-tabs-wrapper .nav-tabs{margin:0;padding:0}.nav-tabs-wrapper .tab{display:inline-block;color:#a9a9a9}.nav-tabs-wrapper .tab:hover{color:grey}.nav-tabs-wrapper .tab.active{color:#222;font-weight:600}.nav-tabs-wrapper .tab:not(:last-of-type){margin-right:1em}.nav-tabs-wrapper .tab a{display:block;padding:.5em 0;text-decoration:none;color:inherit}.vue-tabs{margin-bottom:1rem}", ""]);
 
 // exports
 
@@ -6396,7 +6396,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, ".preview{background:#f4f5fa;border-radius:.5rem;padding:1rem}", ""]);
+exports.push([module.i, ".preview{background:#f4f5fa;border-radius:.5rem;padding:1rem;margin-bottom:1rem}", ""]);
 
 // exports
 
