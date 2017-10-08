@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="props-table-wrap">
     <table class="props-table">
       <thead>
         <tr>
@@ -41,7 +41,14 @@ export default {
 </script>
 
 <style>
+  .props-table-wrap {
+    overflow: auto;
+  }
+
   .props-table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    overflow: auto;
     width: 100%;
   }
 
@@ -54,10 +61,6 @@ export default {
   .props-table td {
     border-bottom: 1px solid rgba(0, 0, 0, .1);
     padding: .5rem 0;
-  }
-
-  .props-table td pre {
-    margin: 0;
   }
 
 </style>

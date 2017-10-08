@@ -11,6 +11,8 @@
   import CodeSnippet from './CodeSnippet.vue'
   import RenderedExample from './RenderedExample.vue'
   import PropsTable from './PropsTable.vue'
+  import VuePrism from 'vue-prism'
+  Vue.use(VuePrism)
 
   export default {
     name: 'elucidate',

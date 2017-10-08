@@ -35,9 +35,8 @@
 
 <style>
   @import './theme.css';
-
+  
   body {
     font-family: 'Helvetica'
   }
-
 </style>
