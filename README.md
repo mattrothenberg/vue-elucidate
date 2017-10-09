@@ -1,7 +1,11 @@
 # Elucidate
 [![npm version](https://badge.fury.io/js/vue-elucidate.svg)](https://badge.fury.io/js/vue-elucidate)
 
-A library that makes it a breeze to "shed light" on  your Vue component. Check out this [demo video](https://streamable.com/eir1u)!
+A library that makes it a breeze to "shed light" on  your Vue component.
+
+Demo URL: https://broker-pool-45468.netlify.com/#/
+
+Demo Video: https://streamable.com/eir1u
 
 # Installation (Yarn)
 ```
