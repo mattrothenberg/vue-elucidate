@@ -33,7 +33,7 @@ The latter is an object shaped thusly:
 
 Let's assume you have a component named `custom-button`. It's defined in `custom-button.vue` thusly:
 
-```
+```vue
 <template>
   <button :class="classList">
     <slot></slot>
@@ -77,5 +77,28 @@ Elucidate works by:
 - Rendering an example code snippet, e.g., `<custom-button size="small">Hello</custom-button>`
 - Documenting that snippet, as well as any props/functions that were passed to it
 - Documenting all of the props exposed by `<custom-button>`, in this case `variant` and `size`.
+
+So, the following code:
+
+```html
+<elucidate :component="button" :example="example"></elucidate>
+```
+
+```js
+import CustomButton from '@/components/CustomButton'
+import '@/darcula.css'
+
+export default {
+  data () {
+    return {
+      button: CustomButton,
+      example: {
+        markup: `<custom-button size="small">Hello</custom-button>`
+      }
+    }
+  }
+}
+```
+...would produce the following result:
 
 ![Sample Screenshot](https://user-images.githubusercontent.com/5148596/31322500-ba7257e8-ac66-11e7-8e1c-1c05d006482c.png)
