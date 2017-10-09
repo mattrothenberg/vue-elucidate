@@ -6432,9 +6432,13 @@ exports.push([module.i, ".preview{background:#f4f5fa;border-radius:.5rem;padding
     __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component(this.component.name, this.component);
   },
   mounted: function mounted() {
+    var props = this.example.props;
+
     var MarkedUp = __WEBPACK_IMPORTED_MODULE_0_vue___default.a.extend({
       template: this.example.markup,
-      props: this.example.props,
+      data: function data() {
+        return props;
+      },
       methods: this.example.methods
     });
     new MarkedUp({ el: this.$refs.rendered });

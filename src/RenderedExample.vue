@@ -22,9 +22,13 @@
       Vue.component(this.component.name, this.component)
     },
     mounted () {
+      let props = this.example.props
+
       let MarkedUp = Vue.extend({
         template: this.example.markup,
-        props: this.example.props,
+        data: function () {
+          return props
+        },
         methods: this.example.methods
       })
       new MarkedUp({ el: this.$refs.rendered })
