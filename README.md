@@ -1,4 +1,5 @@
 # Elucidate
+[![npm version](https://badge.fury.io/js/vue-elucidate.svg)](https://badge.fury.io/js/vue-elucidate)
 
 A library that makes it a breeze to "shed light" on  your Vue component.
 
