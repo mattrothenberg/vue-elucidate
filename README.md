@@ -76,3 +76,5 @@ Elucidate works by:
 - Rendering an example code snippet, e.g., `<custom-button size="small">Hello</custom-button>`
 - Documenting that snippet, as well as any props/functions that were passed to it
 - Documenting all of the props exposed by `<custom-button>`, in this case `variant` and `size`.
+
+![Sample Screenshot](https://user-images.githubusercontent.com/5148596/31322500-ba7257e8-ac66-11e7-8e1c-1c05d006482c.png)
