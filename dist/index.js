@@ -4521,7 +4521,7 @@ module.exports = function listToStyles(parentId, list) {
     },
     renderProps: function renderProps() {
       if (this.hasProps) {
-        return 'data () { ' + JSON.stringify(this.example.props) + '}';
+        return 'data () { return ' + JSON.stringify(this.example.props) + '}';
       } else {
         return '';
       }

@@ -47,7 +47,7 @@
       },
       renderProps () {
         if (this.hasProps) {
-          return `data () { ${JSON.stringify(this.example.props)}}`
+          return `data () { return ${JSON.stringify(this.example.props)}}`
         } else {
           return ''
         }
