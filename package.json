@@ -1,6 +1,6 @@
 {
   "name": "vue-elucidate",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "A library for documenting Vue.js components",
   "main": "dist/index.js",
   "repository": "https://github.com/mattrothenberg/vue-elucidate",
