@@ -21,7 +21,7 @@ import CollapsibleCodeSnippet from './CollapsibleCodeSnippet.vue'
 export default {
   name: 'props-table-row',
   props: {
-    prop: Object,
+    prop: null,
     name: String
   },
   components: {

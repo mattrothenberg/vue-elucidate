@@ -6428,10 +6428,8 @@ exports.push([module.i, ".preview{background:#f4f5fa;border-radius:.5rem;padding
       required: true
     }
   },
-  created: function created() {
-    __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component(this.component.name, this.component);
-  },
   mounted: function mounted() {
+    __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component(this.component.name, this.component);
     var props = this.example.props || {};
 
     var MarkedUp = __WEBPACK_IMPORTED_MODULE_0_vue___default.a.extend({
@@ -6621,7 +6619,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 /* harmony default export */ __webpack_exports__["a"] = ({
   name: 'props-table-row',
   props: {
-    prop: Object,
+    prop: null,
     name: String
   },
   components: {

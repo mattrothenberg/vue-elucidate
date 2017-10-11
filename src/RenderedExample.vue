@@ -18,10 +18,8 @@
         required: true
       }
     },
-    created () {
-      Vue.component(this.component.name, this.component)
-    },
     mounted () {
+      Vue.component(this.component.name, this.component)
       let props = this.example.props || {}
 
       let MarkedUp = Vue.extend({
