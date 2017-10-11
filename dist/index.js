@@ -6635,11 +6635,16 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     },
     type: function type() {
       if (typeof this.prop.type === 'undefined') return 'any';
-      var type = _typeof(this.prop.type());
-      if (type === 'object') {
-        if (Array.isArray(this.prop.type())) return 'array';
+      try {
+        var type = _typeof(this.prop.type());
+        if (type === 'object') {
+          if (Array.isArray(this.prop.type())) return 'array';
+        }
+        return type;
+      } catch (e) {
+        console.warn(this.prop, e);
+        return 'n/a';
       }
-      return type;
     }
   }
 });
