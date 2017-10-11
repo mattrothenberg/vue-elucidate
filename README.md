@@ -3,7 +3,7 @@
 
 A library that makes it a breeze to "shed light" on  your Vue component.
 
-Demo URL: https://broker-pool-45468.netlify.com/#/
+Demo: https://miller-herbert-73888.netlify.com/#/
 
 Demo Video: https://streamable.com/eir1u
 
@@ -218,3 +218,9 @@ Elucidate uses [Prism JS](http://prismjs.com/) for syntax highlighting. Elucidat
 }
 
 ```
+
+# To-Do
+- [ ] Test Coverage
+- [ ] Accommodate multiple components in a single example
+- [ ] Accommodate multiple examples
+- [ ] Investigate slot-based API for further customization of sub-components
