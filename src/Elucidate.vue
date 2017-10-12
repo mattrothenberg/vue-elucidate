@@ -1,6 +1,10 @@
 <template>
   <div>
-    <rendered-example :examples="exampleList" :component="activeComp"></rendered-example>
+    <rendered-example
+      @example-change="handleExampleChange"
+      :names="names"
+      :component="activeComp">
+    </rendered-example>
     <!-- <code-snippet :example="example"></code-snippet>
     <props-table :component="component"></props-table> -->
   </div>
@@ -32,16 +36,8 @@
     },
     data () {
       return {
-        exampleList: [],
-        activeComp: {}
-      }
-    },
-    methods: {
-      slugify
-    },
-    computed: {
-      hasExamples () {
-        return Array.isArray(this.example)
+        exampleList: {},
+        activeCompName: '',
       }
     },
     props: {
@@ -54,24 +50,45 @@
         type: null
       }
     },
+    methods: {
+      slugify,
+      handleExampleChange (name) {
+        this.activeCompName = name
+      },
+      buildComponent (ex) {
+        let comp = {}
+        comp[this.component.name] = this.component
+
+        return {
+          template: ex.markup,
+          data () {
+            return ex.props || {}
+          },
+          methods: ex.methods,
+          components: comp
+        }
+      }
+    },
+    computed: {
+      hasExamples () {
+        return Array.isArray(this.example)
+      },
+      names () {
+        return Object.keys(this.exampleList)
+      },
+      activeComp () {
+        return this.exampleList[this.activeCompName]
+      }
+    },
     created () {
       Vue.use(this.component.name, this.component)
-      let comp = {}
-      comp[this.component.name] = this.component
+
       if (this.hasExamples) {
         this.example.forEach((ex) => {
-          let c = {
-            template: ex.markup,
-            data () {
-              return ex.props
-            },
-            methods: ex.methods,
-            components: comp
-          }
-          this.exampleList.push(c)
+          this.exampleList[slugify(ex.name)] = this.buildComponent(ex)
         })
+        this.activeCompName = slugify(this.example[0].name)
       }
-      this.activeComp = this.exampleList[1]
     }
   }
 </script>

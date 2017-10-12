@@ -1,12 +1,14 @@
 <template>
   <div>
-    <!-- <select v-model="selectedComponent">
-      <option v-for="(ex, index) in examples" :key="index" :value="ex.name">
-        {{ ex }}
+    <select @change="handleChange">
+      <option v-for="(name, index) in names" :key="index" :value="name">
+        {{ name }}
       </option>
-    </select> -->
+    </select>
     <div class="preview">
-      <component :is="component"></component>
+      <keep-alive>
+        <component :is="component"></component>
+      </keep-alive>
     </div>
   </div>
 </template>
@@ -16,13 +18,17 @@
   export default {
     name: 'rendered-example',
     props: {
-      examples: {
-        type: null,
-        required: true
+      names: {
+        type: Array
       },
       component: {
         type: null,
         required: true
+      }
+    },
+    methods: {
+      handleChange (e) {
+        this.$emit('example-change', e.target.value)
       }
     }
   }

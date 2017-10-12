@@ -4345,6 +4345,10 @@ var Component = normalizeComponent(
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -4366,19 +4370,11 @@ var slugify = function slugify(str) {
   },
   data: function data() {
     return {
-      exampleList: [],
-      activeComp: {}
+      exampleList: {},
+      activeCompName: ''
     };
   },
 
-  methods: {
-    slugify: slugify
-  },
-  computed: {
-    hasExamples: function hasExamples() {
-      return Array.isArray(this.example);
-    }
-  },
   props: {
     example: {
       type: null,
@@ -4389,27 +4385,48 @@ var slugify = function slugify(str) {
       type: null
     }
   },
+  methods: {
+    slugify: slugify,
+    handleExampleChange: function handleExampleChange(name) {
+      this.activeCompName = name;
+    },
+    buildComponent: function buildComponent(ex) {
+      var comp = {};
+      comp[this.component.name] = this.component;
+
+      return {
+        template: ex.markup,
+        data: function data() {
+          return ex.props || {};
+        },
+
+        methods: ex.methods,
+        components: comp
+      };
+    }
+  },
+  computed: {
+    hasExamples: function hasExamples() {
+      return Array.isArray(this.example);
+    },
+    names: function names() {
+      return Object.keys(this.exampleList);
+    },
+    activeComp: function activeComp() {
+      return this.exampleList[this.activeCompName];
+    }
+  },
   created: function created() {
     var _this = this;
 
     __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(this.component.name, this.component);
-    var comp = {};
-    comp[this.component.name] = this.component;
+
     if (this.hasExamples) {
       this.example.forEach(function (ex) {
-        var c = {
-          template: ex.markup,
-          data: function data() {
-            return ex.props;
-          },
-
-          methods: ex.methods,
-          components: comp
-        };
-        _this.exampleList.push(c);
+        _this.exampleList[slugify(ex.name)] = _this.buildComponent(ex);
       });
+      this.activeCompName = slugify(this.example[0].name);
     }
-    this.activeComp = this.exampleList[1];
   }
 });
 
@@ -6462,18 +6479,24 @@ exports.push([module.i, ".preview{background:#f4f5fa;border-radius:.5rem;padding
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["a"] = ({
   name: 'rendered-example',
   props: {
-    examples: {
-      type: null,
-      required: true
+    names: {
+      type: Array
     },
     component: {
       type: null,
       required: true
+    }
+  },
+  methods: {
+    handleChange: function handleChange(e) {
+      this.$emit('example-change', e.target.value);
     }
   }
 });
@@ -6483,7 +6506,7 @@ exports.push([module.i, ".preview{background:#f4f5fa;border-radius:.5rem;padding
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('div',{staticClass:"preview"},[_c(_vm.component,{tag:"component"})],1)])}
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('select',{on:{"change":_vm.handleChange}},_vm._l((_vm.names),function(name,index){return _c('option',{key:index,domProps:{"value":name}},[_vm._v("\n      "+_vm._s(name)+"\n    ")])})),_vm._v(" "),_c('div',{staticClass:"preview"},[_c('keep-alive',[_c(_vm.component,{tag:"component"})],1)],1)])}
 var staticRenderFns = []
 var esExports = { render: render, staticRenderFns: staticRenderFns }
 /* harmony default export */ __webpack_exports__["a"] = (esExports);
@@ -7676,7 +7699,7 @@ module.exports = g;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('rendered-example',{attrs:{"examples":_vm.exampleList,"component":_vm.activeComp}})],1)}
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('rendered-example',{attrs:{"names":_vm.names,"component":_vm.activeComp},on:{"example-change":_vm.handleExampleChange}})],1)}
 var staticRenderFns = []
 var esExports = { render: render, staticRenderFns: staticRenderFns }
 /* harmony default export */ __webpack_exports__["a"] = (esExports);
