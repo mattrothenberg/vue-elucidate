@@ -1,6 +1,6 @@
 <template>
   <div>
-    <select @change="handleChange">
+    <select @change="handleChange" v-if="hasManyExamples">
       <option v-for="(name, index) in names" :key="index" :value="name">
         {{ name }}
       </option>
@@ -24,6 +24,11 @@
       component: {
         type: null,
         required: true
+      }
+    },
+    computed: {
+      hasManyExamples () {
+        return this.names.length > 1
       }
     },
     methods: {

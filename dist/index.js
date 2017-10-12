@@ -4426,6 +4426,9 @@ var slugify = function slugify(str) {
         _this.exampleList[slugify(ex.name)] = _this.buildComponent(ex);
       });
       this.activeCompName = slugify(this.example[0].name);
+    } else {
+      this.exampleList[slugify(this.example.name)] = this.buildComponent(this.example);
+      this.activeCompName = slugify(this.example.name);
     }
   }
 });
@@ -6494,6 +6497,11 @@ exports.push([module.i, ".preview{background:#f4f5fa;border-radius:.5rem;padding
       required: true
     }
   },
+  computed: {
+    hasManyExamples: function hasManyExamples() {
+      return this.names.length > 1;
+    }
+  },
   methods: {
     handleChange: function handleChange(e) {
       this.$emit('example-change', e.target.value);
@@ -6506,7 +6514,7 @@ exports.push([module.i, ".preview{background:#f4f5fa;border-radius:.5rem;padding
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('select',{on:{"change":_vm.handleChange}},_vm._l((_vm.names),function(name,index){return _c('option',{key:index,domProps:{"value":name}},[_vm._v("\n      "+_vm._s(name)+"\n    ")])})),_vm._v(" "),_c('div',{staticClass:"preview"},[_c('keep-alive',[_c(_vm.component,{tag:"component"})],1)],1)])}
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[(_vm.hasManyExamples)?_c('select',{on:{"change":_vm.handleChange}},_vm._l((_vm.names),function(name,index){return _c('option',{key:index,domProps:{"value":name}},[_vm._v("\n      "+_vm._s(name)+"\n    ")])})):_vm._e(),_vm._v(" "),_c('div',{staticClass:"preview"},[_c('keep-alive',[_c(_vm.component,{tag:"component"})],1)],1)])}
 var staticRenderFns = []
 var esExports = { render: render, staticRenderFns: staticRenderFns }
 /* harmony default export */ __webpack_exports__["a"] = (esExports);

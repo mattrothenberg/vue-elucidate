@@ -88,6 +88,9 @@
           this.exampleList[slugify(ex.name)] = this.buildComponent(ex)
         })
         this.activeCompName = slugify(this.example[0].name)
+      } else {
+        this.exampleList[slugify(this.example.name)] = this.buildComponent(this.example)
+        this.activeCompName = slugify(this.example.name)
       }
     }
   }
