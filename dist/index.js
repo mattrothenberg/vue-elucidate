@@ -4353,6 +4353,10 @@ var Component = normalizeComponent(
 
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_4_vue_prism__["a" /* default */]);
 
+var slugify = function slugify(str) {
+  return str.toString().toLowerCase().replace(/\s+/g, '-').replace(/[^\w\-]+/g, '').replace(/\-\-+/g, '-').replace(/^-+/, '').replace(/-+$/, '');
+};
+
 /* harmony default export */ __webpack_exports__["a"] = ({
   name: 'elucidate',
   components: {
@@ -4360,15 +4364,52 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_4_vue_
     RenderedExample: __WEBPACK_IMPORTED_MODULE_2__RenderedExample_vue__["a" /* default */],
     PropsTable: __WEBPACK_IMPORTED_MODULE_3__PropsTable_vue__["a" /* default */]
   },
+  data: function data() {
+    return {
+      exampleList: [],
+      activeComp: {}
+    };
+  },
+
+  methods: {
+    slugify: slugify
+  },
+  computed: {
+    hasExamples: function hasExamples() {
+      return Array.isArray(this.example);
+    }
+  },
   props: {
     example: {
-      type: Object,
+      type: null,
       required: true
     },
     component: {
       required: true,
       type: null
     }
+  },
+  created: function created() {
+    var _this = this;
+
+    __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(this.component.name, this.component);
+    var comp = {};
+    comp[this.component.name] = this.component;
+    if (this.hasExamples) {
+      this.example.forEach(function (ex) {
+        var c = {
+          template: ex.markup,
+          data: function data() {
+            return ex.props;
+          },
+
+          methods: ex.methods,
+          components: comp
+        };
+        _this.exampleList.push(c);
+      });
+    }
+    this.activeComp = this.exampleList[1];
   }
 });
 
@@ -6414,32 +6455,26 @@ exports.push([module.i, ".preview{background:#f4f5fa;border-radius:.5rem;padding
 //
 //
 //
-
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["a"] = ({
   name: 'rendered-example',
   props: {
-    example: {
-      type: Object,
+    examples: {
+      type: null,
       required: true
     },
     component: {
+      type: null,
       required: true
     }
-  },
-  mounted: function mounted() {
-    __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component(this.component.name, this.component);
-    var props = this.example.props || {};
-
-    var MarkedUp = __WEBPACK_IMPORTED_MODULE_0_vue___default.a.extend({
-      template: this.example.markup,
-      data: function data() {
-        return props;
-      },
-      methods: this.example.methods
-    });
-    new MarkedUp({ el: this.$refs.rendered });
   }
 });
 
@@ -6448,7 +6483,7 @@ exports.push([module.i, ".preview{background:#f4f5fa;border-radius:.5rem;padding
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"preview"},[_c('div',{ref:"rendered"})])}
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('div',{staticClass:"preview"},[_c(_vm.component,{tag:"component"})],1)])}
 var staticRenderFns = []
 var esExports = { render: render, staticRenderFns: staticRenderFns }
 /* harmony default export */ __webpack_exports__["a"] = (esExports);
@@ -7641,7 +7676,7 @@ module.exports = g;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('rendered-example',{attrs:{"example":_vm.example,"component":_vm.component}}),_vm._v(" "),_c('code-snippet',{attrs:{"example":_vm.example}}),_vm._v(" "),_c('props-table',{attrs:{"component":_vm.component}})],1)}
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('rendered-example',{attrs:{"examples":_vm.exampleList,"component":_vm.activeComp}})],1)}
 var staticRenderFns = []
 var esExports = { render: render, staticRenderFns: staticRenderFns }
 /* harmony default export */ __webpack_exports__["a"] = (esExports);

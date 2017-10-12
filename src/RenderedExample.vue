@@ -1,35 +1,29 @@
 <template>
-  <div class="preview">
-    <div ref="rendered"></div>
+  <div>
+    <!-- <select v-model="selectedComponent">
+      <option v-for="(ex, index) in examples" :key="index" :value="ex.name">
+        {{ ex }}
+      </option>
+    </select> -->
+    <div class="preview">
+      <component :is="component"></component>
+    </div>
   </div>
 </template>
 
 <script>
   import Vue from 'vue'
-
   export default {
     name: 'rendered-example',
     props: {
-      example: {
-        type: Object,
+      examples: {
+        type: null,
         required: true
       },
       component: {
+        type: null,
         required: true
       }
-    },
-    mounted () {
-      Vue.component(this.component.name, this.component)
-      let props = this.example.props || {}
-
-      let MarkedUp = Vue.extend({
-        template: this.example.markup,
-        data: function () {
-          return props
-        },
-        methods: this.example.methods
-      })
-      new MarkedUp({ el: this.$refs.rendered })
     }
   }
 </script>
