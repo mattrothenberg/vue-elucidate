@@ -1,10 +1,5 @@
 <template>
   <div>
-    <select @change="handleChange" v-if="hasManyExamples">
-      <option v-for="(name, index) in names" :key="index" :value="name">
-        {{ name }}
-      </option>
-    </select>
     <div class="preview">
       <keep-alive>
         <component :is="component"></component>
@@ -18,22 +13,9 @@
   export default {
     name: 'rendered-example',
     props: {
-      names: {
-        type: Array
-      },
       component: {
         type: null,
         required: true
-      }
-    },
-    computed: {
-      hasManyExamples () {
-        return this.names.length > 1
-      }
-    },
-    methods: {
-      handleChange (e) {
-        this.$emit('example-change', e.target.value)
       }
     }
   }

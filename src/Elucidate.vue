@@ -1,10 +1,7 @@
 <template>
   <div>
-    <rendered-example
-      @example-change="handleExampleChange"
-      :names="names"
-      :component="activeComp">
-    </rendered-example>
+    <example-picker @example-change="handleExampleChange" :names="names" v-if="hasManyExamples"></example-picker> 
+    <rendered-example :key="activeCompName" :component="activeComp"></rendered-example>
     <code-snippet :key="activeCompName" :example="activeExample"></code-snippet>
     <props-table :component="component"></props-table>
   </div>
@@ -12,15 +9,17 @@
 
 <script>
   import Vue from 'vue'
-  import CodeSnippet from './CodeSnippet.vue'
+  import ExamplePicker from './ExamplePicker.vue'
   import RenderedExample from './RenderedExample.vue'
+  import CodeSnippet from './CodeSnippet.vue'
   import PropsTable from './PropsTable.vue'
 
   export default {
     name: 'elucidate',
     components: {
-      CodeSnippet,
+      ExamplePicker,
       RenderedExample,
+      CodeSnippet,
       PropsTable
     },
     data () {
@@ -40,9 +39,6 @@
       }
     },
     methods: {
-      handleExampleChange (name) {
-        this.activeCompName = name
-      },
       buildComponent (ex) {
         let comp = {}
         comp[this.component.name] = this.component
@@ -55,6 +51,9 @@
           methods: ex.methods,
           components: comp
         }
+      },
+      handleExampleChange (example) {
+        this.activeCompName = example
       }
     },
     computed: {
