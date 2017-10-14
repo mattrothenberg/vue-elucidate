@@ -2858,7 +2858,7 @@ prism-themes@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/prism-themes/-/prism-themes-1.0.0.tgz#58089547ed39df273e5195e1628c69177341bf88"
 
-prismjs@^1.6.0:
+prismjs@^1.8.1:
   version "1.8.1"
   resolved "https://registry.yarnpkg.com/prismjs/-/prismjs-1.8.1.tgz#bd0cdc32e9a561c1c8c3c9733765a7f1ec3b54ee"
   optionalDependencies:
@@ -3546,12 +3546,6 @@ vue-loader@^13.0.5:
 vue-nav-tabs@^0.5.4:
   version "0.5.4"
   resolved "https://registry.yarnpkg.com/vue-nav-tabs/-/vue-nav-tabs-0.5.4.tgz#2cac400fc83a66bd6cd9c36d2c863187846d0cba"
-
-vue-prism@^1.0.5:
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/vue-prism/-/vue-prism-1.0.5.tgz#6e7777adb2fa11c0a8cb99e0265112a105549550"
-  dependencies:
-    prismjs "^1.6.0"
 
 vue-style-loader@^3.0.0:
   version "3.0.3"

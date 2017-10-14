@@ -1,10 +1,10 @@
 <template>
-  <vue-tabs>
+  <vue-tabs ref="tabs">
     <v-tab title="Markup">
-      <pre style="margin: 0;" class="language-markup"><code>{{ example.markup }}</code></pre>
+      <pre style="margin: 0;"><code :key="example.markup" v-prism class="language-markup">{{ example.markup }}</code></pre>
     </v-tab>
     <v-tab title="Script" v-if="shouldShowScriptTab">
-      <pre style="margin: 0;" class="language-javascript"><code>{{ script }}</code></pre>
+      <pre style="margin: 0;"><code :key="example.markup" v-prism class="language-javascript">{{ script }}</code></pre>
     </v-tab>
   </vue-tabs>
 </template>
@@ -12,12 +12,16 @@
 <script>
   import {VueTabs, VTab} from 'vue-nav-tabs'
   import beautify from 'js-beautify'
+  import { prism } from './prism.js'
 
   export default {
     name: 'code-snippet',
     components: {
       VueTabs,
       VTab
+    },
+    directives: {
+      prism: prism
     },
     props: {
       example: {
@@ -31,6 +35,9 @@
       },
       beautifyMethod (method) {
         return beautify(method.toString().replace('function', ''))
+      },
+      handleTabChange (tabIndex, newTab, oldTab) {
+        console.log(tabIndex, newTab, oldTab)
       }
     },
     computed: {

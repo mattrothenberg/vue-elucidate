@@ -1,35 +1,22 @@
 <template>
-  <div class="preview">
-    <div ref="rendered"></div>
+  <div>
+    <div class="preview">
+      <keep-alive>
+        <component :is="component"></component>
+      </keep-alive>
+    </div>
   </div>
 </template>
 
 <script>
   import Vue from 'vue'
-
   export default {
     name: 'rendered-example',
     props: {
-      example: {
-        type: Object,
-        required: true
-      },
       component: {
+        type: null,
         required: true
       }
-    },
-    mounted () {
-      Vue.component(this.component.name, this.component)
-      let props = this.example.props || {}
-
-      let MarkedUp = Vue.extend({
-        template: this.example.markup,
-        data: function () {
-          return props
-        },
-        methods: this.example.methods
-      })
-      new MarkedUp({ el: this.$refs.rendered })
     }
   }
 </script>
