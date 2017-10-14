@@ -5,8 +5,8 @@
       :names="names"
       :component="activeComp">
     </rendered-example>
-    <!-- <code-snippet :example="example"></code-snippet>
-    <props-table :component="component"></props-table> -->
+    <code-snippet :key="activeCompName" :example="activeExample"></code-snippet>
+    <props-table :component="component"></props-table>
   </div>
 </template>
 
@@ -15,17 +15,6 @@
   import CodeSnippet from './CodeSnippet.vue'
   import RenderedExample from './RenderedExample.vue'
   import PropsTable from './PropsTable.vue'
-  import VuePrism from 'vue-prism'
-  Vue.use(VuePrism)
-
-  const slugify = (str) => {
-    return str.toString().toLowerCase()
-      .replace(/\s+/g, '-')
-      .replace(/[^\w\-]+/g, '')
-      .replace(/\-\-+/g, '-')
-      .replace(/^-+/, '')
-      .replace(/-+$/, '')
-  }
 
   export default {
     name: 'elucidate',
@@ -37,7 +26,7 @@
     data () {
       return {
         exampleList: {},
-        activeCompName: '',
+        activeCompName: ''
       }
     },
     props: {
@@ -51,7 +40,6 @@
       }
     },
     methods: {
-      slugify,
       handleExampleChange (name) {
         this.activeCompName = name
       },
@@ -70,7 +58,7 @@
       }
     },
     computed: {
-      hasExamples () {
+      hasManyExamples () {
         return Array.isArray(this.example)
       },
       names () {
@@ -78,19 +66,26 @@
       },
       activeComp () {
         return this.exampleList[this.activeCompName]
+      },
+      activeExample () {
+        if (this.hasManyExamples) {
+          return this.example.find((ex) => ex.name === this.activeCompName)
+        } else {
+          return this.example
+        }
       }
     },
     created () {
       Vue.use(this.component.name, this.component)
 
-      if (this.hasExamples) {
+      if (this.hasManyExamples) {
         this.example.forEach((ex) => {
-          this.exampleList[slugify(ex.name)] = this.buildComponent(ex)
+          this.exampleList[ex.name] = this.buildComponent(ex)
         })
-        this.activeCompName = slugify(this.example[0].name)
+        this.activeCompName = this.example[0].name
       } else {
-        this.exampleList[slugify(this.example.name)] = this.buildComponent(this.example)
-        this.activeCompName = slugify(this.example.name)
+        this.exampleList[this.example.name] = this.buildComponent(this.example)
+        this.activeCompName = this.example.name
       }
     }
   }
