@@ -3,10 +3,7 @@
     <example-picker @example-change="handleExampleChange" :names="names" v-if="hasManyExamples"></example-picker> 
     <rendered-example :key="activeCompName" :component="activeComp"></rendered-example>
     <code-snippet :key="activeCompName" :example="activeExample"></code-snippet>
-    <div v-if="hasManyComponents">
-      <props-table v-for="(c, index) in component" :key="index" :component="c"></props-table>
-    </div>
-    <props-table v-else :component="component"></props-table>
+    <props-table v-for="(component, index) in localComponents" :key="index" :component="component"></props-table>
   </div>
 </template>
 
@@ -28,7 +25,8 @@
     data () {
       return {
         exampleList: {},
-        activeCompName: ''
+        activeCompName: '',
+        localComponents: []
       }
     },
     props: {
@@ -90,8 +88,10 @@
       if (this.hasManyComponents) {
         this.component.forEach(c => {
           Vue.use(c.name, c)
+          this.localComponents.push(c)
         })
       } else {
+        this.localComponents.push(this.component)
         Vue.use(this.component.name, this.component)
       }
 

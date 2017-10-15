@@ -4346,9 +4346,6 @@ var Component = normalizeComponent(
 //
 //
 //
-//
-//
-//
 
 
 
@@ -4367,7 +4364,8 @@ var Component = normalizeComponent(
   data: function data() {
     return {
       exampleList: {},
-      activeCompName: ''
+      activeCompName: '',
+      localComponents: []
     };
   },
 
@@ -4437,8 +4435,10 @@ var Component = normalizeComponent(
     if (this.hasManyComponents) {
       this.component.forEach(function (c) {
         __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(c.name, c);
+        _this2.localComponents.push(c);
       });
     } else {
+      this.localComponents.push(this.component);
       __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(this.component.name, this.component);
     }
 
@@ -7813,7 +7813,7 @@ var esExports = { render: render, staticRenderFns: staticRenderFns }
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[(_vm.hasManyExamples)?_c('example-picker',{attrs:{"names":_vm.names},on:{"example-change":_vm.handleExampleChange}}):_vm._e(),_vm._v(" "),_c('rendered-example',{key:_vm.activeCompName,attrs:{"component":_vm.activeComp}}),_vm._v(" "),_c('code-snippet',{key:_vm.activeCompName,attrs:{"example":_vm.activeExample}}),_vm._v(" "),(_vm.hasManyComponents)?_c('div',_vm._l((_vm.component),function(c,index){return _c('props-table',{key:index,attrs:{"component":c}})})):_c('props-table',{attrs:{"component":_vm.component}})],1)}
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[(_vm.hasManyExamples)?_c('example-picker',{attrs:{"names":_vm.names},on:{"example-change":_vm.handleExampleChange}}):_vm._e(),_vm._v(" "),_c('rendered-example',{key:_vm.activeCompName,attrs:{"component":_vm.activeComp}}),_vm._v(" "),_c('code-snippet',{key:_vm.activeCompName,attrs:{"example":_vm.activeExample}}),_vm._v(" "),_vm._l((_vm.localComponents),function(component,index){return _c('props-table',{key:index,attrs:{"component":component}})})],2)}
 var staticRenderFns = []
 var esExports = { render: render, staticRenderFns: staticRenderFns }
 /* harmony default export */ __webpack_exports__["a"] = (esExports);
