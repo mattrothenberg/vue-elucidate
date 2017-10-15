@@ -25,13 +25,14 @@ The `<elucidate>` component takes two props, `component` and `example`.
 
 The former is, quite literally, a Vue component (either imported into your current app, or defined inline).
 
-The latter is either a single object shaped thusly, or an array of objects shaped thusly:
+The latter is either a single example object shaped thusly, or an array of example objects shaped thusly:
 
 | Key | Value |
 | --- | --- |
 | `markup` | An HTML code snippet that you would like to document |
 | `props` | An object defining the props referenced by your HTML code snippet |
 | `methods` | An object defining the methods referenced by your HTML code snippet |
+| `name` | (OPTIONAL) A display name for the given component if part of an array of examples |
 
 # How does it work?
 
