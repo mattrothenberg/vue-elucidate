@@ -1,6 +1,7 @@
 var path = require('path')
 var webpack = require('webpack')
 var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
+var ExtractTextPlugin = require("extract-text-webpack-plugin")
 
 module.exports = {
   entry: './src/index.js',
@@ -16,6 +17,13 @@ module.exports = {
       {
         test: /\.vue$/,
         loader: 'vue-loader'
+      },
+      {
+        test: /\.css$/,
+        use: ExtractTextPlugin.extract({
+          fallback: "style-loader",
+          use: "css-loader"
+        })
       },
       {
         test: /\.js$/,
@@ -36,6 +44,7 @@ module.exports = {
     new webpack.LoaderOptionsPlugin({
       minimize: true
     }),
+    new ExtractTextPlugin("style.css"),
     new OptimizeCSSPlugin({
       cssProcessorOptions: {
         safe: true
