@@ -1,10 +1,8 @@
 <template>
-  <div>
-    <div class="preview">
-      <keep-alive>
-        <component :is="component"></component>
-      </keep-alive>
-    </div>
+  <div class="elucidate-preview">
+    <keep-alive>
+      <component :is="component"></component>
+    </keep-alive>
   </div>
 </template>
 
@@ -20,12 +18,3 @@
     }
   }
 </script>
-
-<style>
-  .preview {
-    background: #f4f5fa;
-    border-radius: .5rem;
-    padding: 1rem;
-    margin-bottom: 1rem;
-  }
-</style>

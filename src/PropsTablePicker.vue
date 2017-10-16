@@ -1,6 +1,6 @@
 <template>
   <div class="elucidate-example-picker">
-    <label>Example</label>
+    <label>API</label>
     <div class="elucidate-select">
       <select @change="handleChange">
         <option v-for="(name, index) in names" :key="index" :value="name">
@@ -13,15 +13,13 @@
 
 <script>
   export default {
-    name: 'example-picker',
+    name: 'props-table-picker',
     props: {
-      names: {
-        type: Array
-      }
+      names: Array
     },
     methods: {
       handleChange (e) {
-        this.$emit('example-change', e.target.value)
+        this.$emit('props-change', e.target.value)
       }
     }
   }

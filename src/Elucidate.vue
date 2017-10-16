@@ -3,7 +3,8 @@
     <example-picker @example-change="handleExampleChange" :names="names" v-if="hasManyExamples"></example-picker> 
     <rendered-example :key="activeCompName" :component="activeComp"></rendered-example>
     <code-snippet :key="activeCompName" :example="activeExample"></code-snippet>
-    <props-table v-for="(component, index) in localComponents" :key="index" :component="component"></props-table>
+    <props-table-picker @props-change="handlePropsChange" :names="componentNames" v-if="hasManyComponents"></props-table-picker>
+    <props-table :key="activeProps" :component="activePropTableSpecimen"></props-table>
   </div>
 </template>
 
@@ -12,6 +13,7 @@
   import ExamplePicker from './ExamplePicker.vue'
   import RenderedExample from './RenderedExample.vue'
   import CodeSnippet from './CodeSnippet.vue'
+  import PropsTablePicker from './PropsTablePicker.vue'
   import PropsTable from './PropsTable.vue'
 
   export default {
@@ -20,13 +22,14 @@
       ExamplePicker,
       RenderedExample,
       CodeSnippet,
-      PropsTable
+      PropsTable,
+      PropsTablePicker
     },
     data () {
       return {
         exampleList: {},
         activeCompName: '',
-        localComponents: []
+        activeProps: ''
       }
     },
     props: {
@@ -61,7 +64,10 @@
       },
       handleExampleChange (example) {
         this.activeCompName = example
-      }
+      },
+      handlePropsChange (props) {
+        this.activeProps = props 
+      },
     },
     computed: {
       hasManyExamples () {
@@ -73,8 +79,18 @@
       names () {
         return Object.keys(this.exampleList)
       },
+      componentNames () {
+        return this.component.map(c => c.name)
+      },  
       activeComp () {
         return this.exampleList[this.activeCompName]
+      },
+      activePropTableSpecimen () {
+        if (this.hasManyComponents) {
+          return this.component.find((c) => c.name === this.activeProps)
+        } else {
+          return this.component
+        }       
       },
       activeExample () {
         if (this.hasManyExamples) {
@@ -88,10 +104,9 @@
       if (this.hasManyComponents) {
         this.component.forEach(c => {
           Vue.use(c.name, c)
-          this.localComponents.push(c)
         })
+        this.activeProps = this.component[0].name
       } else {
-        this.localComponents.push(this.component)
         Vue.use(this.component.name, this.component)
       }
 

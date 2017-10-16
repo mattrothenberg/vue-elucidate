@@ -1,5 +1,5 @@
 <template>
-  <vue-tabs ref="tabs">
+  <vue-tabs class="elucidate-tabs" ref="tabs">
     <v-tab title="Markup">
       <pre style="margin: 0;"><code :key="example.markup" v-prism class="language-markup">{{ example.markup }}</code></pre>
     </v-tab>
@@ -81,39 +81,3 @@
     }
   }
 </script>
-
-<style>
-  .nav-tabs-wrapper .nav-tabs {
-    margin: 0;
-    padding: 0;
-  }
-
-  .nav-tabs-wrapper .tab {
-    display: inline-block;
-    color: darkgrey;
-  }
-
-  .nav-tabs-wrapper .tab:hover {
-    color: grey;
-  }
-
-  .nav-tabs-wrapper .tab.active {
-    color: #222;
-    font-weight: 600;
-  }
-  
-  .nav-tabs-wrapper .tab:not(:last-of-type) {
-    margin-right: 1em;
-  }
-
-  .nav-tabs-wrapper .tab a {
-    display: block;
-    padding: .5em 0;
-    text-decoration: none;
-    color: inherit;
-  }
-
-  .vue-tabs {
-    margin-bottom: 1rem;
-  }
-</style>
