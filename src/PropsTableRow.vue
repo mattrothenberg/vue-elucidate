@@ -1,10 +1,10 @@
 <template>
   <tr>
-    <td class="prop-name">{{ name }}</td>
-    <td class="prop-type">
+    <td class="elucidate-prop-name">{{ name }}</td>
+    <td class="elucidate-prop-type">
       <pre>{{ type }}</pre>
     </td>
-    <td class="prop-default">
+    <td class="elucidate-prop-default">
       <div v-if="defaultVal.length > 100">
         <collapsible-code-snippet :code="defaultVal"></collapsible-code-snippet>
       </div>
