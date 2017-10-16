@@ -23,7 +23,7 @@ Vue.use(Elucidate)
 
 The `<elucidate>` component takes two props, `component` and `example`. 
 
-The former is, quite literally, a Vue component (either imported into your current app, or defined inline).
+The former is, quite literally, a single Vue component (either imported into your current app, or defined inline), or an array of Vue components.
 
 The latter is either a single example object shaped thusly, or an array of example objects shaped thusly:
 
@@ -115,113 +115,60 @@ Elucidate is very customizable. I've included some light CSS here and there to m
 Elucidate uses [Prism JS](http://prismjs.com/) for syntax highlighting. Elucidate doesn't ship out-of-the-box with a particular syntax highlighting theme, so feel free to pick one from [Prism Themes](https://github.com/PrismJS/prism-themes/)
 
 ## Default CSS
+Include Elucidate's default styles by including the following line of code in your project:
+```
+import 'vue-elucidate/dist/style.css'
+```
+
+Elucidate maintains a light footprint, and affords you the following classes for purposes of customization:
 
 ```css
-/* The element that houses the rendered code sample */ 
-.preview {
-  background: #f4f5fa;
-  border-radius: .5rem;
-  padding: 1rem;
-  margin-bottom: 1rem;
+.elucidate-example-picker {}
+
+.elucidate-example-picker label {}
+
+.elucidate-select {}
+
+.elucidate-select select {}
+
+.elucidate-select::after {}
+
+@supports (-webkit-appearance: none) or (appearance: none) or ((-moz-appearance: none) and (mask-type: alpha)) {
+  .elucidate-select::after {
+  }
+
+  .elucidate-select select {}
+
+  .elucidate-select select:focus {}
 }
 
-/* The tabbed UI for toggling between markup / script */
-.nav-tabs-wrapper .nav-tabs {
-  margin: 0;
-  padding: 0;
-}
+.elucidate-preview {}
 
-.nav-tabs-wrapper .tab {
-  display: inline-block;
-  color: darkgrey;
-}
+.elucidate-tabs {}
 
-.nav-tabs-wrapper .tab:hover {
-  color: grey;
-}
+.elucidate-tabs .nav-tabs {}
 
-.nav-tabs-wrapper .tab.active {
-  color: #222;
-  font-weight: 600;
-}
+.elucidate-tabs .tab {}
 
-.nav-tabs-wrapper .tab:not(:last-of-type) {
-  margin-right: 1em;
-}
+.elucidate-tabs .tab:hover {}
 
-.nav-tabs-wrapper .tab a {
-  display: block;
-  padding: .5em 0;
-  text-decoration: none;
-  color: inherit;
-}
+.elucidate-tabs .tab.active {}
 
-.vue-tabs {
-  margin-bottom: 1rem;
-}
+.elucidate-tabs .tab:not(:last-of-type) {}
 
-/* Props Table */
-.props-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-  overflow: auto;
-}
+.elucidate-tabs .tab a {}
 
-.props-table th {
-  border-bottom: 1px solid rgba(0, 0, 0, .1);
-  padding: .5rem 0;
-  text-align: left;
-}
+.elucidate-table-wrap {}
 
-.props-table td {
-  border-bottom: 1px solid rgba(0, 0, 0, .1);
-  padding: .5rem 0;
-}
+.elucidate-table {}
 
-.props-table td pre,
-.props-table td code {
-  margin: 0;
-  overflow-x: auto; overflow-y: hidden; overflow: scroll;
-}
+.elucidate-table th {}
 
-.code-snippet-wrap {
-  border: 1px solid rgba(0, 0, 0, .1);
-  padding: .5rem;
-  position: relative;
-}
-
-.code-snippet-wrap pre {
-  margin: 0;
-}
-
-.code-snippet-toggle-wrap {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: .5rem 0;
-  pointer-events: none;
-  text-align: center;
-}
-
-.code-snippet-toggle {
-  background: #222;
-  color: white;
-  border: 0;
-  font-weight: 500;
-  border-radius: .5rem;
-  pointer-events: all;
-}
-
-.collapsed {
-  height: 100px;
-  overflow-y: hidden;
-}
-
+.elucidate-table td {}
 ```
 
 # To-Do
 - [ ] Test Coverage
-- [ ] Accommodate multiple components in a single example
-- [ ] Accommodate multiple examples
+- [x] Accommodate multiple components in a single example
+- [x] Accommodate multiple examples
 - [ ] Investigate slot-based API for further customization of sub-components
