@@ -1,8 +1,8 @@
 <template>
   <div>
     <example-picker @example-change="handleExampleChange" :names="names" v-if="hasManyExamples"></example-picker> 
-    <rendered-example :key="activeCompName" :component="activeComp"></rendered-example>
-    <code-snippet :key="activeCompName" :example="activeExample"></code-snippet>
+    <rendered-example :key="activeExampleName" :component="activeExample"></rendered-example>
+    <code-snippet :key="activeExampleName" :example="activeExampleData"></code-snippet>
     <props-table-picker @props-change="handlePropsChange" :names="componentNames" v-if="hasManyComponents"></props-table-picker>
     <props-table :key="activeProps" :component="activePropTableSpecimen"></props-table>
   </div>
@@ -28,7 +28,7 @@
     data () {
       return {
         exampleList: {},
-        activeCompName: '',
+        activeExampleName: '',
         activeProps: ''
       }
     },
@@ -62,8 +62,8 @@
           components: comp
         }
       },
-      handleExampleChange (example) {
-        this.activeCompName = example
+      handleExampleChange (name) {
+        this.activeExampleName = name
       },
       handlePropsChange (props) {
         this.activeProps = props 
@@ -82,8 +82,8 @@
       componentNames () {
         return this.component.map(c => c.name)
       },  
-      activeComp () {
-        return this.exampleList[this.activeCompName]
+      activeExample () {
+        return this.exampleList[this.activeExampleName]
       },
       activePropTableSpecimen () {
         if (this.hasManyComponents) {
@@ -92,9 +92,9 @@
           return this.component
         }       
       },
-      activeExample () {
+      activeExampleData () {
         if (this.hasManyExamples) {
-          return this.example.find((ex) => ex.name === this.activeCompName)
+          return this.example.find((ex) => ex.name === this.activeExampleName)
         } else {
           return this.example
         }
@@ -114,10 +114,10 @@
         this.example.forEach((ex) => {
           this.exampleList[ex.name] = this.buildComponent(ex)
         })
-        this.activeCompName = this.example[0].name
+        this.activeExampleName = this.example[0].name
       } else {
         this.exampleList[this.example.name] = this.buildComponent(this.example)
-        this.activeCompName = this.example.name
+        this.activeExampleName = this.example.name
       }
     }
   }

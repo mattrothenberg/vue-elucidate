@@ -4068,7 +4068,7 @@ var Component = normalizeComponent(
   data: function data() {
     return {
       exampleList: {},
-      activeCompName: '',
+      activeExampleName: '',
       activeProps: ''
     };
   },
@@ -4104,8 +4104,8 @@ var Component = normalizeComponent(
         components: comp
       };
     },
-    handleExampleChange: function handleExampleChange(example) {
-      this.activeCompName = example;
+    handleExampleChange: function handleExampleChange(name) {
+      this.activeExampleName = name;
     },
     handlePropsChange: function handlePropsChange(props) {
       this.activeProps = props;
@@ -4126,8 +4126,8 @@ var Component = normalizeComponent(
         return c.name;
       });
     },
-    activeComp: function activeComp() {
-      return this.exampleList[this.activeCompName];
+    activeExample: function activeExample() {
+      return this.exampleList[this.activeExampleName];
     },
     activePropTableSpecimen: function activePropTableSpecimen() {
       var _this = this;
@@ -4140,12 +4140,12 @@ var Component = normalizeComponent(
         return this.component;
       }
     },
-    activeExample: function activeExample() {
+    activeExampleData: function activeExampleData() {
       var _this2 = this;
 
       if (this.hasManyExamples) {
         return this.example.find(function (ex) {
-          return ex.name === _this2.activeCompName;
+          return ex.name === _this2.activeExampleName;
         });
       } else {
         return this.example;
@@ -4168,10 +4168,10 @@ var Component = normalizeComponent(
       this.example.forEach(function (ex) {
         _this3.exampleList[ex.name] = _this3.buildComponent(ex);
       });
-      this.activeCompName = this.example[0].name;
+      this.activeExampleName = this.example[0].name;
     } else {
       this.exampleList[this.example.name] = this.buildComponent(this.example);
-      this.activeCompName = this.example.name;
+      this.activeExampleName = this.example.name;
     }
   }
 });
@@ -7783,7 +7783,7 @@ var esExports = { render: render, staticRenderFns: staticRenderFns }
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[(_vm.hasManyExamples)?_c('example-picker',{attrs:{"names":_vm.names},on:{"example-change":_vm.handleExampleChange}}):_vm._e(),_vm._v(" "),_c('rendered-example',{key:_vm.activeCompName,attrs:{"component":_vm.activeComp}}),_vm._v(" "),_c('code-snippet',{key:_vm.activeCompName,attrs:{"example":_vm.activeExample}}),_vm._v(" "),(_vm.hasManyComponents)?_c('props-table-picker',{attrs:{"names":_vm.componentNames},on:{"props-change":_vm.handlePropsChange}}):_vm._e(),_vm._v(" "),_c('props-table',{key:_vm.activeProps,attrs:{"component":_vm.activePropTableSpecimen}})],1)}
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[(_vm.hasManyExamples)?_c('example-picker',{attrs:{"names":_vm.names},on:{"example-change":_vm.handleExampleChange}}):_vm._e(),_vm._v(" "),_c('rendered-example',{key:_vm.activeExampleName,attrs:{"component":_vm.activeExample}}),_vm._v(" "),_c('code-snippet',{key:_vm.activeExampleName,attrs:{"example":_vm.activeExampleData}}),_vm._v(" "),(_vm.hasManyComponents)?_c('props-table-picker',{attrs:{"names":_vm.componentNames},on:{"props-change":_vm.handlePropsChange}}):_vm._e(),_vm._v(" "),_c('props-table',{key:_vm.activeProps,attrs:{"component":_vm.activePropTableSpecimen}})],1)}
 var staticRenderFns = []
 var esExports = { render: render, staticRenderFns: staticRenderFns }
 /* harmony default export */ __webpack_exports__["a"] = (esExports);
