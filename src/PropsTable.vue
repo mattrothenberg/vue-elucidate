@@ -1,6 +1,6 @@
 <template>
-  <div class="props-table-wrap">
-    <table class="props-table">
+  <div class="elucidate-table-wrap">
+    <table class="elucidate-table">
       <thead>
         <tr>
           <th>Name</th>
@@ -39,28 +39,3 @@ export default {
   }
 }
 </script>
-
-<style>
-  .props-table-wrap {
-    overflow: auto;
-  }
-
-  .props-table {
-    border-collapse: collapse;
-    border-spacing: 0;
-    overflow: auto;
-    width: 100%;
-  }
-
-  .props-table th {
-    border-bottom: 1px solid rgba(0, 0, 0, .1);
-    padding: .5rem 0;
-    text-align: left;
-  }
-
-  .props-table td {
-    border-bottom: 1px solid rgba(0, 0, 0, .1);
-    padding: .5rem 0;
-  }
-
-</style>
