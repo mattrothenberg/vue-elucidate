@@ -22,15 +22,15 @@
     "vue": "^2.4.4",
     "vue-loader": "^13.0.5",
     "vue-template-compiler": "^2.4.4",
-    "webpack": "^3.6.0"
+    "webpack": "^3.6.0",
+    "extract-text-webpack-plugin": "^3.0.1",
+    "style-loader": "^0.19.0",
+    "css-loader": "^0.28.7"
   },
   "dependencies": {
-    "css-loader": "^0.28.7",
-    "extract-text-webpack-plugin": "^3.0.1",
     "js-beautify": "^1.7.3",
     "prism-themes": "^1.0.0",
     "prismjs": "^1.8.1",
-    "style-loader": "^0.19.0",
     "vue-nav-tabs": "^0.5.4"
   }
 }
