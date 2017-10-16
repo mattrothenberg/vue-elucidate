@@ -3,7 +3,7 @@
 
 A library that makes it a breeze to "shed light" on  your Vue component.
 
-Demo: https://miller-herbert-73888.netlify.com/#/
+Demo: https://mattrothenberg.github.io/vue-elucidate-example
 
 Demo Video: https://streamable.com/eir1u
 
